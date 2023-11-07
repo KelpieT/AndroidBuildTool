@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Build.Reporting;
@@ -7,7 +9,6 @@ using System.IO;
 using System.IO.Compression;
 using System;
 
-#if UNITY_EDITOR
 namespace Viter.BuildTools
 {
     public class AndroidBuildTool
