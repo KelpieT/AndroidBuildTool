@@ -104,9 +104,9 @@ namespace Viter.BuildTools
         private static BuildPlayerOptions GetBuildOptions(string format, string debug)
         {
             BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-            string[] scenes = EditorBuildSettings.scenes.Where(x=>x.enabled).Select(x => x.path).ToArray();
+            string[] scenes = EditorBuildSettings.scenes.Where(x => x.enabled).Select(x => x.path).ToArray();
             buildPlayerOptions.scenes = scenes;
-            buildPlayerOptions.locationPathName = Path.Combine(pathToBuidVersion, $"{format}/{debug}/mahjong{Application.version}_{debug}.{format}");
+            buildPlayerOptions.locationPathName = Path.Combine(pathToBuidVersion, $"{format}/{debug}/{Application.productName}{Application.version}_{debug}.{format}");
             buildPlayerOptions.target = BuildTarget.Android;
             buildPlayerOptions.options = BuildOptions.None;
             return buildPlayerOptions;
