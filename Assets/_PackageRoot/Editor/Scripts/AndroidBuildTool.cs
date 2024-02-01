@@ -1,13 +1,14 @@
 #if UNITY_EDITOR
 
-using UnityEditor;
-using UnityEngine;
-using UnityEditor.Build.Reporting;
-using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEditor;
+using UnityEditor.Build.Reporting;
+using UnityEngine;
 
 namespace Viter.BuildTools
 {
@@ -106,10 +107,17 @@ namespace Viter.BuildTools
             BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
             string[] scenes = EditorBuildSettings.scenes.Where(x => x.enabled).Select(x => x.path).ToArray();
             buildPlayerOptions.scenes = scenes;
-            buildPlayerOptions.locationPathName = Path.Combine(pathToBuidVersion, $"{format}/{debug}/{Application.productName}{Application.version}_{debug}.{format}");
+            string clearAppName = RemoveSpecialCharacters(Application.productName);
+            buildPlayerOptions.locationPathName = Path.Combine(pathToBuidVersion, $"{format}/{debug}/{clearAppName}{Application.version}_{debug}.{format}");
             buildPlayerOptions.target = BuildTarget.Android;
             buildPlayerOptions.options = BuildOptions.None;
             return buildPlayerOptions;
+        }
+
+        public static string RemoveSpecialCharacters(string input)
+        {
+            Regex r = new Regex("(?:[^a-z0-9]|(?<=['\"])s)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+            return r.Replace(input, String.Empty);
         }
 
         // [MenuItem("Build/TestEnableCheats")]
