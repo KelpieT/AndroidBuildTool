@@ -95,6 +95,7 @@ namespace Viter.BuildTools
                 Debug.Log($"{debug} {fileformat}  succeeded: " + summary.totalSize + " bytes");
                 string path = Path.Combine(pathToBuidVersion, $"{fileformat}/{debug}/");
                 path = path.Replace("/", "\\");
+                Debug.Log(path);
                 System.Diagnostics.Process.Start("explorer.exe " + path);
             }
 
