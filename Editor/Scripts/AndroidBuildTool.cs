@@ -93,7 +93,9 @@ namespace Viter.BuildTools
             if (summary.result == BuildResult.Succeeded)
             {
                 Debug.Log($"{debug} {fileformat}  succeeded: " + summary.totalSize + " bytes");
-                System.Diagnostics.Process.Start("explorer.exe "+Path.Combine(pathToBuidVersion, $"{fileformat}/{debug}/"));
+                string path = Path.Combine(pathToBuidVersion, $"{fileformat}/{debug}/");
+                path = path.Replace("/", "\\");
+                System.Diagnostics.Process.Start("explorer.exe " + path);
             }
 
             if (summary.result == BuildResult.Failed)
