@@ -93,10 +93,11 @@ namespace Viter.BuildTools
             if (summary.result == BuildResult.Succeeded)
             {
                 Debug.Log($"{debug} {fileformat}  succeeded: " + summary.totalSize + " bytes");
-                string path = Path.Combine(pathToBuidVersion, $"{fileformat}/{debug}/");
+                // string clearAppName = RemoveSpecialCharacters(Application.productName);
+                string path = buildPlayerOptions.locationPathName;
                 path = path.Replace("/", "\\");
                 Debug.Log(path);
-                System.Diagnostics.Process.Start("explorer.exe", path);
+                System.Diagnostics.Process.Start("explorer.exe", "/select," + path);
             }
 
             if (summary.result == BuildResult.Failed)
